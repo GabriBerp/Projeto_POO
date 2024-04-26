@@ -5,6 +5,8 @@ repositório para guardar os códigos feitos para o meu projeto de Programação
 a ideia inicial desse projeto era ser um "Sistema de Automação de Maquinas em uma fabrica ficticia"</br>
 a ideia evoluiu e acabou se transformando em um "Sistema para Automatizar Maquinas em X fabricas ficticias"</br>
 
+O projeto faz uso de funcionalidades do java como Classes, Heranças, javax.swing.* e entre outros</br>
+
 ### Explicando como funciona
 no começo da execução, a pessoa podera escolher uma quantia de X fabricas, contanto que o numero seja um inteiro maior que 0, ele será aceito.</br>
 cada fabrica pode ser de um tipo especifico:</br>
