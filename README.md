@@ -5,23 +5,28 @@
 Este repositório contém códigos desenvolvidos como parte do projeto de Programação Orientada a Objetos no 3º período do curso de Ciência da Computação na UNICAP.
 
 # Sumario 🗺
-1. Ideia Inicial do Projeto</br>
-  1.1. Funcionalidades Implementadas</br>
-2. Como Funciona</br>
-  2.1 Criando Fabricas</br>
-  2.2 Menu de Fabricas</br>
-  2.3 Criando Maquinas</br>
-  2.4 Menu de Maquinas</br>
-  2.5 Produtos</br>
+1. [Ideia Inicial do Projeto](https://github.com/GabriBerp/Projeto_POO/blob/main/README.md#ideia-inicial-do-projeto-)</br>
+  1.1. [Funcionalidades Implementadas](https://github.com/GabriBerp/Projeto_POO/blob/main/README.md#funcionalidades-implementadas-)</br>
+  
+2. [Como Funciona](https://github.com/GabriBerp/Projeto_POO/blob/main/README.md#como-funciona-)</br>
+  2.1 [Criando Fabricas](https://github.com/GabriBerp/Projeto_POO/blob/main/README.md#criando-fabricas-)</br>
+  2.2 [Menu de Fabricas](https://github.com/GabriBerp/Projeto_POO/blob/main/README.md#menu-de-fabricas-)</br>
+  2.3 [Criando Maquinas](https://github.com/GabriBerp/Projeto_POO/blob/main/README.md#criando-maquinas-)</br>
+  2.4 [Menu de Maquinas](https://github.com/GabriBerp/Projeto_POO/blob/main/README.md#menu-de-maquinas-)</br>
+  2.5 [Produtos](https://github.com/GabriBerp/Projeto_POO/blob/main/README.md#produtos-)</br>
+
+3. Planejamentos para o Projeto
 
 ## Ideia Inicial do Projeto 💡
 
-Inicialmente concebido como um "Sistema de Automação de Máquinas em uma fábrica fictícia", o projeto evoluiu para se tornar um "Sistema para Automatizar Máquinas em X Fábricas Fictícias".
+Inicialmente concebido como um "Sistema de Automação de Máquinas em uma fábrica fictícia", o projeto evoluiu para se tornar um "Sistema para Automatizar Máquinas em Fábricas Fictícias".
 
 ### Funcionalidades Implementadas ⚙
 
-- Utilização de conceitos de Programação Orientada a Objetos em Java, incluindo classes, heranças, e javax.swing.*.
+- Utilização de conceitos de Programação Orientada a Objetos em Java, incluindo os 4 pilares: Abstração, Encapsulamento, Polimorfismo e Herança.
+- Utiliza o javax.swing.* para criação de janelas garantindo ao usuario uma experiencia mais otimizada e melhorada do que está acontecendo no codigo.
 - Funcionalidades de automação para diferentes tipos de máquinas em fábricas fictícias.
+- Uso de Threads para permitir as Maquinas serem automatizadas em segundo plano, e não atrapalhar a experiencia do usuario, enquanto utiliza o programa
 
 ## Como Funciona ❓
 
@@ -149,3 +154,16 @@ public class Produtos {
     }
 }
 ```
+
+## Planejamentos para o Projeto 🎨
+O Objetivo do projeto é se extender até o final do semestre, até la, o projeto vai continuar recebendo constantes alterações e melhorias, para o tornar mais dinamico e otimizado
+| Ideias  | Feitas? | Estado |
+| ------------- | ------------- | ------------- |
+| Fazer uso de Threads para deixar a automatização das maquinas em segundo plano  | <ul><li>- [x] </li> | Terminado |
+| Adicionar uma forma de saber quantos itens foram entregues  | <ul><li>- [ ] </li> | Não Iniciado |
+| Adicionar um limite de produtos por fabrica  | <ul><li>- [ ] </li> | Não Iniciado |
+| Adicionar uma maquina entregadora  | <ul><li>- [ ] </li> | Não Iniciado |
+| Adicionar filtros na opção de listar fabricas  | <ul><li>- [ ] </li> | Não Iniciado |
+| Adicionar um arquivo .txt para armazenar logs das maquinas durante as suas automações  | <ul><li>- [ ] </li> | Não Iniciado |
+
+OBS: Mais ideias podem ser adicionadas ou removidas com o tempo, nada é definitivo ainda.
