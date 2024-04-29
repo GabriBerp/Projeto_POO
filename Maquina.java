@@ -52,9 +52,10 @@ class Maquina extends Thread {
 
 // Máquina de produção
 class MaquinaProducao extends Maquina {
-
+  int produtos_produzidos;
   public MaquinaProducao(int id, int tipo) {
     super(id,tipo);
+    produtos_produzidos = 0;
   }
 
   public void produzir() {
@@ -72,7 +73,7 @@ class MaquinaProducao extends Maquina {
         // Acessando a lista produtos através de uma instância específica de Maquina
         if (Maquina.produtos != null) {
             Maquina.produtos.add(new Produtos(this.tipo));
-            System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " produzido com sucesso");
+            System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " produzido com sucesso\n");
         }
     }
 }
@@ -108,9 +109,10 @@ class MaquinaProducao extends Maquina {
 
 // Máquina de embalagem
 class MaquinaEmbalagem extends Maquina {
-
+  int produtos_embalados;
   public MaquinaEmbalagem(int id, int tipo) {
     super(id,tipo);
+    produtos_embalados = 0;
   }
 
   public void embalar() {
@@ -127,13 +129,20 @@ class MaquinaEmbalagem extends Maquina {
     if (emFuncionamento) {
         // Acessando a lista produtos através de uma instância específica de Maquina
         if (Maquina.produtos != null && Maquina.produtos.size() > 0) {
-          Produtos produto_atual = Maquina.produtos.get(0);
-            if (produto_atual.tipo == tipo){
-              if (!produto_atual.embalado && produto_atual.inspecionado) {
-                  produto_atual.embalado = true;
-                  System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " embalado e enviado com sucesso!");
-                  Maquina.produtos.remove(0);
-              }
+          int i = 0;
+          Produtos produto_atual = Maquina.produtos.get(i);
+          while (produto_atual.tipo != tipo || i < Maquina.produtos.size()){
+            produto_atual = Maquina.produtos.get(i);
+            if (produto_atual.tipo != tipo){
+              i++;
+            }else{
+              break;
+            }
+          }
+            if (!produto_atual.embalado && produto_atual.inspecionado) {
+                produto_atual.embalado = true;
+                System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " embalado e enviado com sucesso!\n");
+                Maquina.produtos.remove(0);
             }
         }
     }
@@ -170,8 +179,10 @@ class MaquinaEmbalagem extends Maquina {
 
 // Máquina de inspeção
 class MaquinaInspecao extends Maquina {
+  int produtos_inspecionados;
   public MaquinaInspecao(int id, int tipo) {
     super(id,tipo);
+    produtos_inspecionados = 0;
   }
 
   public void inspecionar() {
@@ -188,16 +199,24 @@ class MaquinaInspecao extends Maquina {
     if (emFuncionamento) {
         // Acessando a lista produtos através de uma instância específica de Maquina
         if (Maquina.produtos != null && Maquina.produtos.size() > 0) {
-            Produtos produto_atual = Maquina.produtos.get(0);
-            if (produto_atual.tipo == tipo){
-              if (!produto_atual.inspecionado && !produto_atual.temProblema) {
-                  produto_atual.inspecionado = true;
-                  System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e não apresenta problemas!");
-              } else if (produto_atual.temProblema) {
-                  System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e apresenta problemas!\nproduto descartado!");
-                  Maquina.produtos.remove(0);
+            int i = 0;
+            Produtos produto_atual = Maquina.produtos.get(i);
+              while (produto_atual.tipo != tipo || i < Maquina.produtos.size()){
+                produto_atual = Maquina.produtos.get(i);
+                if (produto_atual.tipo != tipo){
+                  i++;
+                }else{
+                  break;
+                }
               }
+            if (!produto_atual.inspecionado && !produto_atual.temProblema) {
+                produto_atual.inspecionado = true;
+                System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e não apresenta problemas!\n");
+            } else if (produto_atual.temProblema) {
+                System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e apresenta problemas!\nproduto descartado!\n");
+                Maquina.produtos.remove(0);
             }
+            
         }
     }
 }
