@@ -23,10 +23,10 @@ Inicialmente concebido como um "Sistema de Automação de Máquinas em uma fábr
 
 ### Funcionalidades Implementadas ⚙
 
-- Utilização de conceitos de Programação Orientada a Objetos em Java, incluindo os 4 pilares: Abstração, Encapsulamento, Polimorfismo e Herança.
-- Utiliza o javax.swing.* para criação de janelas garantindo ao usuario uma experiencia mais otimizada e melhorada do que está acontecendo no codigo.
+- Utilização de conceitos de Programação Orientada a Objetos em Java, incluindo os 4 pilares: ```Abstração, Encapsulamento, Polimorfismo e Herança.```
+- Utiliza o ```javax.swing.*``` para criação de janelas garantindo ao usuario uma experiencia mais otimizada e melhorada do que está acontecendo no codigo.
 - Funcionalidades de automação para diferentes tipos de máquinas em fábricas fictícias.
-- Uso de Threads para permitir as Maquinas serem automatizadas em segundo plano, e não atrapalhar a experiencia do usuario, enquanto utiliza o programa
+- Uso de ```Threads``` para permitir as Maquinas serem automatizadas em segundo plano, e não atrapalhar a experiencia do usuario, enquanto utiliza o programa
 
 ## Como Funciona ❓
 
