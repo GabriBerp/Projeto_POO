@@ -74,6 +74,7 @@ class MaquinaProducao extends Maquina {
         if (Maquina.produtos != null) {
             Maquina.produtos.add(new Produtos(this.tipo));
             System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " produzido com sucesso\n");
+            produtos_produzidos++;
         }
     }
 }
@@ -87,13 +88,13 @@ class MaquinaProducao extends Maquina {
           while (ligada && emFuncionamento) {
             try {
               switch(tipo){
-                case 0: Thread.sleep(20000); break; // Padrão
-                case 1: Thread.sleep(25000); break; // Tecidos
-                case 2: Thread.sleep(30000); break; // Alimentos
-                case 3: Thread.sleep(40000); break; // Veículos
-                case 4: Thread.sleep(35000); break; // Móveis
-                case 5: Thread.sleep(45000); break; // Eletrônicos
-                case 6: Thread.sleep(25000); break; // Brinquedos
+                case 1: Thread.sleep(20000); break; // Padrão
+                case 2: Thread.sleep(25000); break; // Tecidos
+                case 3: Thread.sleep(30000); break; // Alimentos
+                case 4: Thread.sleep(40000); break; // Veículos
+                case 5: Thread.sleep(35000); break; // Móveis
+                case 6: Thread.sleep(45000); break; // Eletrônicos
+                case 7: Thread.sleep(25000); break; // Brinquedos
               }
               produzirProduto();
             } catch (InterruptedException e) {
@@ -142,6 +143,7 @@ class MaquinaEmbalagem extends Maquina {
             if (!produto_atual.embalado && produto_atual.inspecionado) {
                 produto_atual.embalado = true;
                 System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " embalado e enviado com sucesso!\n");
+                produtos_embalados++;
                 Maquina.produtos.remove(0);
             }
         }
@@ -157,13 +159,13 @@ class MaquinaEmbalagem extends Maquina {
           while (ligada && emFuncionamento) {
             try {
               switch(tipo){
-                case 0: Thread.sleep(10000); break; // Padrão
-                case 1: Thread.sleep(15000); break; // Tecidos
-                case 2: Thread.sleep(12000); break; // Alimentos
-                case 3: Thread.sleep(20000); break; // Veículos
-                case 4: Thread.sleep(18000); break; // Móveis
-                case 5: Thread.sleep(25000); break; // Eletrônicos
-                case 6: Thread.sleep(12000); break; // Brinquedos
+                case 1: Thread.sleep(10000); break; // Padrão
+                case 2: Thread.sleep(15000); break; // Tecidos
+                case 3: Thread.sleep(12000); break; // Alimentos
+                case 4: Thread.sleep(20000); break; // Veículos
+                case 5: Thread.sleep(18000); break; // Móveis
+                case 6: Thread.sleep(25000); break; // Eletrônicos
+                case 7: Thread.sleep(12000); break; // Brinquedos
               }
               embalarProduto();
             } catch (InterruptedException e) {
@@ -212,7 +214,8 @@ class MaquinaInspecao extends Maquina {
             if (!produto_atual.inspecionado && !produto_atual.temProblema) {
                 produto_atual.inspecionado = true;
                 System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e não apresenta problemas!\n");
-            } else if (produto_atual.temProblema) {
+                produtos_inspecionados++;
+              } else if (produto_atual.temProblema) {
                 System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e apresenta problemas!\nproduto descartado!\n");
                 Maquina.produtos.remove(0);
             }
@@ -230,13 +233,13 @@ class MaquinaInspecao extends Maquina {
           while (ligada && emFuncionamento) {
             try {
               switch(tipo){
-                case 0: Thread.sleep(8000); break; // Padrão
-                case 1: Thread.sleep(10000); break; // Tecidos
-                case 2: Thread.sleep(7000); break; // Alimentos
-                case 3: Thread.sleep(15000); break; // Veículos
-                case 4: Thread.sleep(12000); break; // Móveis
-                case 5: Thread.sleep(20000); break; // Eletrônicos
-                case 6: Thread.sleep(10000); break; // Brinquedos
+                case 1: Thread.sleep(8000); break; // Padrão
+                case 2: Thread.sleep(10000); break; // Tecidos
+                case 3: Thread.sleep(7000); break; // Alimentos
+                case 4: Thread.sleep(15000); break; // Veículos
+                case 5: Thread.sleep(12000); break; // Móveis
+                case 6: Thread.sleep(20000); break; // Eletrônicos
+                case 7: Thread.sleep(10000); break; // Brinquedos
               }
               inspecionarProduto();
             } catch (InterruptedException e) {
@@ -249,3 +252,5 @@ class MaquinaInspecao extends Maquina {
     }
   }
 }
+
+
