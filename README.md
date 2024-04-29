@@ -15,7 +15,7 @@ Este repositório contém códigos desenvolvidos como parte do projeto de Progra
   2.4 [Menu de Maquinas](https://github.com/GabriBerp/Projeto_POO/blob/main/README.md#menu-de-maquinas-)</br>
   2.5 [Produtos](https://github.com/GabriBerp/Projeto_POO/blob/main/README.md#produtos-)</br>
 
-3. Planejamentos para o Projeto
+3. [Planejamentos para o Projeto](https://github.com/GabriBerp/Projeto_POO/blob/main/README.md#planejamentos-para-o-projeto-)</br>
 
 ## Ideia Inicial do Projeto 💡
 
