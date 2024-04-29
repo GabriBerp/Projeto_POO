@@ -7,7 +7,7 @@ public class Main {
     int numFabricas = Integer.parseInt(JOptionPane.showInputDialog("Quantas fábricas serão controladas?"));
 
     for (int a = 0; a < numFabricas; a++) {
-      Object[] possibilities = { "Padrão", "Tecidos", "Alimentos", "Veículos" };
+      Object[] possibilities = { "Padrão", "Tecidos", "Alimentos", "Veículos", "Moveis", "Eletronicos", "Brinquedos" };
       String opFabrica = (String) JOptionPane.showInputDialog(null, "Qual o tipo da fabrica " + (a + 1) + "?",
           "Tipo de Fábrica", JOptionPane.PLAIN_MESSAGE, null, possibilities, "Padrão");
       switch (opFabrica) {
@@ -22,6 +22,15 @@ public class Main {
           break;
         case "Veículos":
           fabrica.addAutomatizador(4);
+          break;
+        case "Moveis":
+          fabrica.addAutomatizador(5);
+          break;
+        case "Eletronicos":
+          fabrica.addAutomatizador(6);
+          break;
+        case "Brinquedos":
+          fabrica.addAutomatizador(7);
           break;
         default:
           break;
@@ -63,17 +72,17 @@ public class Main {
                     int tipo = Integer.parseInt(tipoInput);
                     switch (tipo) {
                     case 1:
-                        automacao.adicionarMaquina(new MaquinaProducao(i));
+                        automacao.adicionarMaquina(new MaquinaProducao(i,automacao.tipo));
                         qnt_producao++;
                         tipo = 0;
                         break;
                     case 2:
-                        automacao.adicionarMaquina(new MaquinaEmbalagem(i));
+                        automacao.adicionarMaquina(new MaquinaEmbalagem(i,automacao.tipo));
                         qnt_embalagem++;
                         tipo = 0;
                         break;
                     case 3:
-                        automacao.adicionarMaquina(new MaquinaInspecao(i));
+                        automacao.adicionarMaquina(new MaquinaInspecao(i,automacao.tipo));
                         qnt_inspecao++;
                         tipo = 0;
                         break;
@@ -116,6 +125,15 @@ public class Main {
                 break;
                 case 4:
                 op = Integer.parseInt(JOptionPane.showInputDialog("\n\nMenu de Automação de Máquinas:\n===\nFabrica de Veiculos\nID: " + fab_id + "\n===\n1. Ligar Máquinas\n2. Desligar Máquinas\n3. Listar Máquinas\n4. Automatizar Máquinas\n5. Parar Automatização\n6. Voltar\nEscolha uma opção (1, 2, 3, 4, 5 ou 6): "));
+                break;
+                case 5:
+                op = Integer.parseInt(JOptionPane.showInputDialog("\n\nMenu de Automação de Máquinas:\n===\nFabrica de Moveis\nID: " + fab_id + "\n===\n1. Ligar Máquinas\n2. Desligar Máquinas\n3. Listar Máquinas\n4. Automatizar Máquinas\n5. Parar Automatização\n6. Voltar\nEscolha uma opção (1, 2, 3, 4, 5 ou 6): "));
+                break;
+                case 6:
+                op = Integer.parseInt(JOptionPane.showInputDialog("\n\nMenu de Automação de Máquinas:\n===\nFabrica de Eletronicos\nID: " + fab_id + "\n===\n1. Ligar Máquinas\n2. Desligar Máquinas\n3. Listar Máquinas\n4. Automatizar Máquinas\n5. Parar Automatização\n6. Voltar\nEscolha uma opção (1, 2, 3, 4, 5 ou 6): "));
+                break;
+                case 7:
+                op = Integer.parseInt(JOptionPane.showInputDialog("\n\nMenu de Automação de Máquinas:\n===\nFabrica de Brinquedos\nID: " + fab_id + "\n===\n1. Ligar Máquinas\n2. Desligar Máquinas\n3. Listar Máquinas\n4. Automatizar Máquinas\n5. Parar Automatização\n6. Voltar\nEscolha uma opção (1, 2, 3, 4, 5 ou 6): "));
                 break;
             }
             switch (op) {
