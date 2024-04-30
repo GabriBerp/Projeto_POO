@@ -160,9 +160,9 @@ O Objetivo do projeto é se extender até o final do semestre, até la, o projet
 | Ideias  | Feitas? | Estado |
 | ------------- | ------------- | ------------- |
 | Fazer uso de Threads para deixar a automatização das maquinas em segundo plano  | <ul><li>- [x] </li> | Terminado |
-| Adicionar uma forma de saber quantos itens foram entregues  | <ul><li>- [ ] </li> | Não Iniciado |
-| Adicionar um limite de produtos por fabrica  | <ul><li>- [ ] </li> | Não Iniciado |
-| Adicionar uma maquina entregadora  | <ul><li>- [ ] </li> | Não Iniciado |
+| Adicionar uma forma de saber quantos itens foram entregues  | <ul><li>- [ ] </li> | Em Andamento |
+| Adicionar um limite de produtos por fabrica  | <ul><li>- [ ] </li> | Em Andamento |
+| Adicionar uma maquina entregadora  | <ul><li>- [ ] </li> | Em Andamento |
 | Adicionar filtros na opção de listar fabricas  | <ul><li>- [ ] </li> | Não Iniciado |
 | Adicionar um arquivo .txt para armazenar logs das maquinas durante as suas automações  | <ul><li>- [ ] </li> | Não Iniciado |
 
