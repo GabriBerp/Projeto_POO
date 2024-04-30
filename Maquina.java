@@ -127,28 +127,19 @@ class MaquinaEmbalagem extends Maquina {
   }
 
   public void embalarProduto() {
-    if (emFuncionamento) {
-        // Acessando a lista produtos através de uma instância específica de Maquina
-        if (Maquina.produtos != null && Maquina.produtos.size() > 0) {
-          int i = 0;
-          Produtos produto_atual = Maquina.produtos.get(i);
-          while (produto_atual.tipo != tipo || i < Maquina.produtos.size()){
-            produto_atual = Maquina.produtos.get(i);
-            if (produto_atual.tipo != tipo){
-              i++;
-            }else{
-              break;
-            }
-          }
-            if (!produto_atual.embalado && produto_atual.inspecionado) {
+    if (emFuncionamento && Maquina.produtos != null) {
+        for (int i = 0; i < Maquina.produtos.size(); i++) {
+            Produtos produto_atual = Maquina.produtos.get(i);
+            if (produto_atual.tipo == tipo && !produto_atual.embalado && produto_atual.inspecionado) {
                 produto_atual.embalado = true;
                 System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " embalado e enviado com sucesso!\n");
                 produtos_embalados++;
-                Maquina.produtos.remove(0);
+                Maquina.produtos.remove(i);
+                break; // Importante para sair do loop após embalar um produto
             }
         }
     }
-}
+  }
 
   @Override
   public void iniciarThread(){
@@ -198,31 +189,21 @@ class MaquinaInspecao extends Maquina {
   }
 
   public void inspecionarProduto() {
-    if (emFuncionamento) {
-        // Acessando a lista produtos através de uma instância específica de Maquina
-        if (Maquina.produtos != null && Maquina.produtos.size() > 0) {
-            int i = 0;
+    if (emFuncionamento && Maquina.produtos != null) {
+        for (int i = 0; i < Maquina.produtos.size(); i++) {
             Produtos produto_atual = Maquina.produtos.get(i);
-              while (produto_atual.tipo != tipo || i < Maquina.produtos.size()){
-                produto_atual = Maquina.produtos.get(i);
-                if (produto_atual.tipo != tipo){
-                  i++;
-                }else{
-                  break;
-                }
-              }
-            if (!produto_atual.inspecionado && !produto_atual.temProblema) {
+            if (produto_atual.tipo == tipo && !produto_atual.inspecionado && !produto_atual.temProblema) {
                 produto_atual.inspecionado = true;
                 System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e não apresenta problemas!\n");
                 produtos_inspecionados++;
-              } else if (produto_atual.temProblema) {
+            } else if (produto_atual.tipo == tipo && produto_atual.temProblema) {
                 System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e apresenta problemas!\nproduto descartado!\n");
-                Maquina.produtos.remove(0);
+                Maquina.produtos.remove(i);
+                break; // Importante para sair do loop após inspecionar um produto
             }
-            
         }
     }
-}
+  }
 
   @Override
   public void iniciarThread(){
