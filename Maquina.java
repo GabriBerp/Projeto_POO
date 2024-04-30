@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.lang.Thread;
 
+
 // Classe base para todas as máquinas
 class Maquina extends Thread {
   protected int id;
@@ -53,9 +54,35 @@ class Maquina extends Thread {
 // Máquina de produção
 class MaquinaProducao extends Maquina {
   int produtos_produzidos;
+  int produtos_produzidos_total;
+  int limite;
   public MaquinaProducao(int id, int tipo) {
     super(id,tipo);
     produtos_produzidos = 0;
+    produtos_produzidos_total = 0;
+    switch (tipo) {
+      case 1: // Padrão
+          limite = 100;
+          break;
+      case 2: // Tecidos
+          limite = 50;
+          break;
+      case 3: // Alimentos
+          limite = 200;
+          break;
+      case 4: // Veículos
+          limite = 30;
+          break;
+      case 5: // Móveis
+          limite = 80;
+          break;
+      case 6: // Eletrônicos
+          limite = 150;
+          break;
+      case 7: // Brinquedos
+          limite = 120;
+          break;
+    }
   }
 
   public void produzir() {
@@ -72,9 +99,14 @@ class MaquinaProducao extends Maquina {
     if (emFuncionamento) {
         // Acessando a lista produtos através de uma instância específica de Maquina
         if (Maquina.produtos != null) {
-            Maquina.produtos.add(new Produtos(this.tipo));
-            System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " produzido com sucesso\n");
-            produtos_produzidos++;
+            if (produtos_produzidos < limite){
+              Maquina.produtos.add(new Produtos(this.tipo));
+              System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " produzido com sucesso.\n");
+              produtos_produzidos_total++;
+              produtos_produzidos++;
+            }else{
+              System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Fila de Produção cheia!\nnão é possivel adicionar mais produtos.\n");
+            }
         }
     }
 }
@@ -234,4 +266,4 @@ class MaquinaInspecao extends Maquina {
   }
 }
 
-
+// Máquina de Entregas
