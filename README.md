@@ -49,11 +49,12 @@ Após selecionar as fábricas, o usuário é apresentado ao "Menu de Fábricas",
 
 ### Criando Maquinas 🤖
 
-Cada fábrica pode conter X maquinas, existem 3 diferentes tipos de máquinas:
+Cada fábrica pode conter quantas máquinas o usuario desejar, existem 4 diferentes tipos de máquinas:
 
 - **Produção**
 - **Embalagem**
 - **Inspeção**
+- **Entrega**
 
 **Imagem de como é a visão do usuario ao chegar nessa parte:**</br>
 ![image](https://github.com/GabriBerp/Projeto_POO/assets/70419113/b7a512d9-4f51-4b67-8c0b-cb0baf49fa0e)
