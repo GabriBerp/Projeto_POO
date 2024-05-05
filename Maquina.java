@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.lang.Thread;
 
@@ -10,6 +11,7 @@ class Maquina extends Thread {
   protected boolean emFuncionamento;
   protected Thread thread;
   protected static ArrayList<Produtos> produtos;
+  protected static ArrayList<Produtos> produtos_entregando;
 
   public Maquina(int id, int tipo) {
     this.id = id;
@@ -17,6 +19,7 @@ class Maquina extends Thread {
     this.ligada = false;
     this.emFuncionamento = false;
     produtos = new ArrayList<>();
+    produtos_entregando = new ArrayList<>();
   }
 
   public void iniciarThread(){};
@@ -56,10 +59,13 @@ class MaquinaProducao extends Maquina {
   int produtos_produzidos;
   int produtos_produzidos_total;
   int limite;
+  private static ArrayList<MaquinaProducao> todasAsMaquinasProducao = new ArrayList<>();
+
   public MaquinaProducao(int id, int tipo) {
     super(id,tipo);
     produtos_produzidos = 0;
     produtos_produzidos_total = 0;
+    todasAsMaquinasProducao.add(this);
     switch (tipo) {
       case 1: // Padrão
           limite = 100;
@@ -109,7 +115,15 @@ class MaquinaProducao extends Maquina {
             }
         }
     }
-}
+  }
+
+  public static ArrayList<MaquinaProducao> getTodasAsMaquinasProducao() {
+    return todasAsMaquinasProducao;
+  }
+
+  public int getProdutosProduzidos(){
+    return produtos_produzidos_total;
+  }
 
   @Override
   public void iniciarThread(){
@@ -166,6 +180,7 @@ class MaquinaEmbalagem extends Maquina {
                 produto_atual.embalado = true;
                 System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " embalado e enviado com sucesso!\n");
                 produtos_embalados++;
+                Maquina.produtos_entregando.add(produto_atual);
                 Maquina.produtos.remove(i);
                 break; // Importante para sair do loop após embalar um produto
             }
@@ -228,11 +243,17 @@ class MaquinaInspecao extends Maquina {
                 produto_atual.inspecionado = true;
                 System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e não apresenta problemas!\n");
                 produtos_inspecionados++;
+                break;
             } else if (produto_atual.tipo == tipo && produto_atual.temProblema) {
                 System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e apresenta problemas!\nproduto descartado!\n");
                 Maquina.produtos.remove(i);
-                break; // Importante para sair do loop após inspecionar um produto
+                break;
             }
+            for (MaquinaProducao maquinaProducao : MaquinaProducao.getTodasAsMaquinasProducao()) {
+              if (maquinaProducao.tipo == tipo && ((maquinaProducao.produtos_produzidos == maquinaProducao.limite) && (maquinaProducao.produtos_produzidos > 0))) {
+                  maquinaProducao.produtos_produzidos--;
+              }
+          }
         }
     }
   }
@@ -267,3 +288,53 @@ class MaquinaInspecao extends Maquina {
 }
 
 // Máquina de Entregas
+class MaquinaEntrega extends Maquina {
+  int produtos_entregados;
+  public MaquinaEntrega(int id, int tipo) {
+    super(id,tipo);
+    produtos_entregados = 0;
+  }
+
+  public void entregar() {
+    if(ligada) {
+      this.emFuncionamento = true;
+      System.out.println("\nMáquina de entrega com ID: " + id + ", está entregando.");
+      iniciarThread();
+    }else{
+      System.out.println("\nA máquina de entrega com ID: " + id + ", está desligada. Não é possível entregar.");
+    }
+  }
+
+  public void entregarProduto() {
+    if (emFuncionamento && Maquina.produtos_entregando != null) {
+      for (int i = 0; i < Maquina.produtos_entregando.size(); i++) {
+          Produtos produto_atual = Maquina.produtos_entregando.get(i);
+          if (produto_atual.tipo == tipo) {
+              System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi entregue com sucesso!");
+              produtos_entregados++;
+              Maquina.produtos_entregando.remove(i);
+          }
+      }
+      System.out.println("");
+    }
+  }
+
+  public void iniciarThread(){
+    if (thread == null || !thread.isAlive()) {
+      thread = new Thread(new Runnable() {
+        public void run() {
+          // Lógica de execução da máquina
+          while (ligada && emFuncionamento) {
+            try {
+              Thread.sleep(10000);
+              entregarProduto();
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }
+          }
+        }
+      });
+      thread.start();
+    }
+  }
+}
