@@ -74,22 +74,22 @@ public class Main {
                     int tipo = Integer.parseInt(tipoInput);
                     switch (tipo) {
                     case 1:
-                        automacao.adicionarMaquina(new MaquinaProducao(i,automacao.tipo));
+                        automacao.adicionarMaquina(new MaquinaProducao(i,automacao.tipo,automacao));
                         qnt_producao++;
                         tipo = 0;
                         break;
                     case 2:
-                        automacao.adicionarMaquina(new MaquinaEmbalagem(i,automacao.tipo));
+                        automacao.adicionarMaquina(new MaquinaEmbalagem(i,automacao.tipo,automacao));
                         qnt_embalagem++;
                         tipo = 0;
                         break;
                     case 3:
-                        automacao.adicionarMaquina(new MaquinaInspecao(i,automacao.tipo));
+                        automacao.adicionarMaquina(new MaquinaInspecao(i,automacao.tipo,automacao));
                         qnt_inspecao++;
                         tipo = 0;
                         break;
                     case 4:
-                        automacao.adicionarMaquina(new MaquinaEntrega(i,automacao.tipo));
+                        automacao.adicionarMaquina(new MaquinaEntrega(i,automacao.tipo,automacao));
                         qnt_entrega++;
                         tipo = 0;
                         break;
