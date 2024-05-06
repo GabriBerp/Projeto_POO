@@ -110,7 +110,7 @@ class MaquinaProducao extends Maquina {
             if (produtos_produzidos < limite){
               Maquina.produtos.add(new Produtos(this.tipo));
               System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " produzido com sucesso.\n");
-              produtos_produzidos_total++;
+              fabrica_pai.atualizarProdutosProduzidos(1);
               produtos_produzidos++;
             }else{
               System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Fila de Produção cheia!\nnão é possivel adicionar mais produtos.\n");
@@ -121,10 +121,6 @@ class MaquinaProducao extends Maquina {
 
   public static ArrayList<MaquinaProducao> getTodasAsMaquinasProducao() {
     return todasAsMaquinasProducao;
-  }
-
-  public int getProdutosProduzidos(){
-    return produtos_produzidos_total;
   }
 
   @Override
@@ -181,7 +177,7 @@ class MaquinaEmbalagem extends Maquina {
             if (produto_atual.tipo == tipo && !produto_atual.embalado && produto_atual.inspecionado) {
                 produto_atual.embalado = true;
                 System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " embalado e enviado com sucesso!\n");
-                produtos_embalados++;
+                fabrica_pai.atualizarProdutosEmbalados(1);
                 Maquina.produtos_entregando.add(produto_atual);
                 Maquina.produtos.remove(i);
                 break; // Importante para sair do loop após embalar um produto
@@ -244,7 +240,7 @@ class MaquinaInspecao extends Maquina {
             if (produto_atual.tipo == tipo && !produto_atual.inspecionado && !produto_atual.temProblema) {
                 produto_atual.inspecionado = true;
                 System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e não apresenta problemas!\n");
-                produtos_inspecionados++;
+                fabrica_pai.atualizarProdutosInspecionados(1);
                 break;
             } else if (produto_atual.tipo == tipo && produto_atual.temProblema) {
                 System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e apresenta problemas!\nproduto descartado!\n");
@@ -313,7 +309,7 @@ class MaquinaEntrega extends Maquina {
           Produtos produto_atual = Maquina.produtos_entregando.get(i);
           if (produto_atual.tipo == tipo) {
               System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi entregue com sucesso!");
-              produtos_entregados++;
+              fabrica_pai.atualizarProdutosEntregues(1);
               Maquina.produtos_entregando.remove(i);
           }
       }
