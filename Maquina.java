@@ -12,12 +12,14 @@ class Maquina extends Thread {
   protected Thread thread;
   protected static ArrayList<Produtos> produtos;
   protected static ArrayList<Produtos> produtos_entregando;
+  protected AutomacaoMaquinas fabrica_pai;
 
-  public Maquina(int id, int tipo) {
+  public Maquina(int id, int tipo, AutomacaoMaquinas pai) {
     this.id = id;
     this.tipo = tipo;
     this.ligada = false;
     this.emFuncionamento = false;
+    this.fabrica_pai = pai;
     produtos = new ArrayList<>();
     produtos_entregando = new ArrayList<>();
   }
@@ -61,8 +63,8 @@ class MaquinaProducao extends Maquina {
   int limite;
   private static ArrayList<MaquinaProducao> todasAsMaquinasProducao = new ArrayList<>();
 
-  public MaquinaProducao(int id, int tipo) {
-    super(id,tipo);
+  public MaquinaProducao(int id, int tipo, AutomacaoMaquinas pai) {
+    super(id,tipo,pai);
     produtos_produzidos = 0;
     produtos_produzidos_total = 0;
     todasAsMaquinasProducao.add(this);
@@ -107,11 +109,11 @@ class MaquinaProducao extends Maquina {
         if (Maquina.produtos != null) {
             if (produtos_produzidos < limite){
               Maquina.produtos.add(new Produtos(this.tipo));
-              System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " produzido com sucesso.\n");
+              System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " produzido com sucesso.\n");
               produtos_produzidos_total++;
               produtos_produzidos++;
             }else{
-              System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Fila de Produção cheia!\nnão é possivel adicionar mais produtos.\n");
+              System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Fila de Produção cheia!\nnão é possivel adicionar mais produtos.\n");
             }
         }
     }
@@ -157,8 +159,8 @@ class MaquinaProducao extends Maquina {
 // Máquina de embalagem
 class MaquinaEmbalagem extends Maquina {
   int produtos_embalados;
-  public MaquinaEmbalagem(int id, int tipo) {
-    super(id,tipo);
+  public MaquinaEmbalagem(int id, int tipo, AutomacaoMaquinas pai) {
+    super(id,tipo,pai);
     produtos_embalados = 0;
   }
 
@@ -178,7 +180,7 @@ class MaquinaEmbalagem extends Maquina {
             Produtos produto_atual = Maquina.produtos.get(i);
             if (produto_atual.tipo == tipo && !produto_atual.embalado && produto_atual.inspecionado) {
                 produto_atual.embalado = true;
-                System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " embalado e enviado com sucesso!\n");
+                System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " embalado e enviado com sucesso!\n");
                 produtos_embalados++;
                 Maquina.produtos_entregando.add(produto_atual);
                 Maquina.produtos.remove(i);
@@ -220,8 +222,8 @@ class MaquinaEmbalagem extends Maquina {
 // Máquina de inspeção
 class MaquinaInspecao extends Maquina {
   int produtos_inspecionados;
-  public MaquinaInspecao(int id, int tipo) {
-    super(id,tipo);
+  public MaquinaInspecao(int id, int tipo, AutomacaoMaquinas pai) {
+    super(id,tipo,pai);
     produtos_inspecionados = 0;
   }
 
@@ -241,11 +243,11 @@ class MaquinaInspecao extends Maquina {
             Produtos produto_atual = Maquina.produtos.get(i);
             if (produto_atual.tipo == tipo && !produto_atual.inspecionado && !produto_atual.temProblema) {
                 produto_atual.inspecionado = true;
-                System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e não apresenta problemas!\n");
+                System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e não apresenta problemas!\n");
                 produtos_inspecionados++;
                 break;
             } else if (produto_atual.tipo == tipo && produto_atual.temProblema) {
-                System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e apresenta problemas!\nproduto descartado!\n");
+                System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi inspecionado, e apresenta problemas!\nproduto descartado!\n");
                 Maquina.produtos.remove(i);
                 break;
             }
@@ -290,8 +292,8 @@ class MaquinaInspecao extends Maquina {
 // Máquina de Entregas
 class MaquinaEntrega extends Maquina {
   int produtos_entregados;
-  public MaquinaEntrega(int id, int tipo) {
-    super(id,tipo);
+  public MaquinaEntrega(int id, int tipo, AutomacaoMaquinas pai) {
+    super(id,tipo,pai);
     produtos_entregados = 0;
   }
 
@@ -310,7 +312,7 @@ class MaquinaEntrega extends Maquina {
       for (int i = 0; i < Maquina.produtos_entregando.size(); i++) {
           Produtos produto_atual = Maquina.produtos_entregando.get(i);
           if (produto_atual.tipo == tipo) {
-              System.out.println("\nLOG MAQUINA:\nTIPO: " + this.tipo + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi entregue com sucesso!");
+              System.out.println("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: " + this.tipo + " foi entregue com sucesso!");
               produtos_entregados++;
               Maquina.produtos_entregando.remove(i);
           }
