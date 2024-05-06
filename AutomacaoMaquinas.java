@@ -4,10 +4,12 @@ class AutomacaoMaquinas {
   private ArrayList<Maquina> maquinas;
   private boolean inicializada;
   public int tipo;
+  public int id;
 
-  public AutomacaoMaquinas() {
+  public AutomacaoMaquinas(int id) {
     this.maquinas = new ArrayList<Maquina>();
     this.inicializada = false;
+    this.id = id;
   }
 
   public boolean foiInicializada(){
