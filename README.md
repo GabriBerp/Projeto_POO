@@ -19,7 +19,7 @@ Este repositório contém códigos desenvolvidos como parte do projeto de Progra
 
 ## Ideia Inicial do Projeto 💡
 
-Inicialmente concebido como um "Sistema de Automação de Máquinas em uma fábrica fictícia", o projeto evoluiu para se tornar um "Sistema para Automatizar Máquinas em Fábricas Fictícias".
+Inicialmente concebido como um "Sistema de Automação de Máquinas em UMA fábrica fictícia", o projeto evoluiu para se tornar um "Sistema para Automatizar Máquinas em diversas fábricas fictícias".
 
 ### Funcionalidades Implementadas ⚙
 
@@ -163,6 +163,9 @@ O Objetivo do projeto é se extender até o final do semestre, até la, o projet
 | Fazer uso de Threads para deixar a automatização das maquinas em segundo plano  | <ul><li>- [x] </li> | Terminado |
 | Adicionar uma forma de saber quantos itens foram entregues  | <ul><li>- [ ] </li> | Em Andamento |
 | Adicionar uma maquina entregadora  | <ul><li>- [x] </li> | Terminado |
-| Adicionar filtros na opção de listar fabricas  | <ul><li>- [ ] </li> | Não Iniciado |
+| Monitoramento de Status em Tempo Real  | <ul><li>- [ ] </li> | Não Iniciado |
+| Monitoramento de Status em Tempo Real  | <ul><li>- [ ] </li> | Não Iniciado |
+| Monitoramento de Status em Tempo Real  | <ul><li>- [ ] </li> | Não Iniciado |
+| Monitoramento de Status em Tempo Real  | <ul><li>- [ ] </li> | Não Iniciado |
 
 OBS: Mais ideias podem ser adicionadas ou removidas com o tempo, nada é definitivo ainda.
