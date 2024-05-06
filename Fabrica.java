@@ -16,7 +16,7 @@ class Fabrica {
   }
 
   public void addAutomatizador(int tipo_fabrica){
-    AutomacaoMaquinas novo = new AutomacaoMaquinas();
+    AutomacaoMaquinas novo = new AutomacaoMaquinas(this.fabricas.size());
     novo.tipo = tipo_fabrica;
     this.fabricas.add(novo);
     System.out.println("Fabrica com ID: " + (this.fabricas.size()-1) + ", adicionado!");
