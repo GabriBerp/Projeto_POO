@@ -26,19 +26,19 @@ class AutomacaoMaquinas {
         return produtosEntregues;
     }
 
-    public synchronized void atualizarProdutosProduzidos(int quantidade) {
+    public void atualizarProdutosProduzidos(int quantidade) {
         produtosProduzidos += quantidade;
     }
 
-    public synchronized void atualizarProdutosEmbalados(int quantidade) {
+    public void atualizarProdutosEmbalados(int quantidade) {
         produtosEmbalados += quantidade;
     }
 
-    public synchronized void atualizarProdutosInspecionados(int quantidade) {
+    public void atualizarProdutosInspecionados(int quantidade) {
         produtosInspecionados += quantidade;
     }
 
-    public synchronized void atualizarProdutosEntregues(int quantidade) {
+    public void atualizarProdutosEntregues(int quantidade) {
         produtosEntregues += quantidade;
     }
 
@@ -46,6 +46,11 @@ class AutomacaoMaquinas {
         this.maquinas = new ArrayList<Maquina>();
         this.inicializada = false;
         this.id = id;
+
+        this.produtosProduzidos = 0;
+        this.produtosInspecionados = 0;
+        this.produtosEmbalados = 0;
+        this.produtosEntregues = 0;
     }
 
     public boolean foiInicializada() {

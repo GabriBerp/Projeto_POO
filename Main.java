@@ -54,7 +54,7 @@ public class Main {
 
     do {
       option = Integer.parseInt(JOptionPane.showInputDialog(frame, "== Menu de Fabricas ==\nId da fabrica selecionada: "
-          + fab_id + "\n1- Iniciar\n2- Trocar Fabrica\n3- Listar Fabricas\n4- Encerrar\nEscolha uma opção (1, 2, 3 ou 4):"));
+          + fab_id + "\n1- Iniciar\n2- Trocar Fabrica\n3- Listar Fabricas\n4- Monitorar Automacao\n5- Encerrar\nEscolha uma opção (1, 2, 3 ou 4):"));
 
       switch (option) {
         case 1:
@@ -355,8 +355,41 @@ public class Main {
             }
             JOptionPane.showMessageDialog(null, fabricasInfo.toString());
             break;
+        case 4:
+        automacao = fabrica.PegarAutomacao(fab_id);
+        if (automacao.foiInicializada()) {
+          JDialog dialog = new JDialog();
+          dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+          
+          final AutomacaoMaquinas automacaoFinal = automacao;
+          final int FabricaID = fab_id;
+          Thread optionPaneThread = new Thread(() -> {
+            do {
+                StringBuilder realTimeInfo = new StringBuilder();
+
+                int produzidos = automacaoFinal.getProdutosProduzidos();
+                int inspecionados = automacaoFinal.getProdutosInspecionados();
+                int embalados = automacaoFinal.getProdutosEmbalados();
+                int entregues = automacaoFinal.getProdutosEntregues();
+
+                realTimeInfo.append("== Informações de Produção ==\n");
+                realTimeInfo.append("ID da Fábrica: ").append(FabricaID).append("\n\n");
+                realTimeInfo.append("-> Produtos produzidos: ").append(produzidos).append("\n");
+                realTimeInfo.append("-> Produtos inspecionados: ").append(inspecionados).append("\n");
+                realTimeInfo.append("-> Produtos embalados: ").append(embalados).append("\n");
+                realTimeInfo.append("-> Produtos entregues: ").append(entregues).append("\n");
+
+                JOptionPane.showMessageDialog(dialog, realTimeInfo.toString(), "Informações de Produção", JOptionPane.INFORMATION_MESSAGE);
+            } while (dialog.isVisible());
+        });
+
+          optionPaneThread.start();
+        } else {
+            JOptionPane.showMessageDialog(null, "A fábrica selecionada ainda não foi inicializada.");
         }
-    } while (option != 4);
+          break;
+        }
+    } while (option != 5);
 
     JOptionPane.showMessageDialog(null, "Encerrando o programa...");
 
