@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-import java.lang.Thread;
 
-class AutomacaoMaquinas extends Thread {
+class AutomacaoMaquinas {
     private ArrayList<Maquina> maquinas;
     private boolean inicializada;
     public int tipo;
@@ -10,7 +9,6 @@ class AutomacaoMaquinas extends Thread {
     private int produtosEmbalados;
     private int produtosInspecionados;
     private int produtosEntregues;
-    protected Thread thread;
 
     public int getProdutosProduzidos() {
         return produtosProduzidos;
