@@ -109,17 +109,19 @@ class MaquinaProducao extends Maquina {
         if (Maquina.produtos != null) {
             if (produtos_produzidos < limite){
               Maquina.produtos.add(new Produtos(this.tipo));
-              System.out.print("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: ");
-              switch(this.tipo){
-                  case 1: System.out.println("1 - Padrão");break;
-                  case 2: System.out.println("2 - Tecido");break;
-                  case 3: System.out.println("3 - Alimento");break;
-                  case 4: System.out.println("4 - Veiculo");break;
-                  case 5: System.out.println("5 - Movel");break;
-                  case 6: System.out.println("6 - Eletronico");break;
-                  case 7: System.out.println("7 - Brinquedo");break;
-                }
-              System.out.println("produzido com sucesso.\n");
+              if (this.id != -1){
+                System.out.print("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: ");
+                switch(this.tipo){
+                    case 1: System.out.println("1 - Padrão");break;
+                    case 2: System.out.println("2 - Tecido");break;
+                    case 3: System.out.println("3 - Alimento");break;
+                    case 4: System.out.println("4 - Veiculo");break;
+                    case 5: System.out.println("5 - Movel");break;
+                    case 6: System.out.println("6 - Eletronico");break;
+                    case 7: System.out.println("7 - Brinquedo");break;
+                  }
+                System.out.println("produzido com sucesso.\n");
+              }
               fabrica_pai.atualizarProdutosProduzidos(1);
               produtos_produzidos++;
             }else{
@@ -141,6 +143,7 @@ class MaquinaProducao extends Maquina {
           // Lógica de execução da máquina
           while (ligada && emFuncionamento) {
             try {
+              if (id != -1){
               switch(tipo){
                 case 1: Thread.sleep(20000); break; // Padrão
                 case 2: Thread.sleep(25000); break; // Tecidos
@@ -149,6 +152,7 @@ class MaquinaProducao extends Maquina {
                 case 5: Thread.sleep(35000); break; // Móveis
                 case 6: Thread.sleep(45000); break; // Eletrônicos
                 case 7: Thread.sleep(25000); break; // Brinquedos
+              }
               }
               produzirProduto();
             } catch (InterruptedException e) {
@@ -186,6 +190,7 @@ class MaquinaEmbalagem extends Maquina {
             Produtos produto_atual = Maquina.produtos.get(i);
             if ((produto_atual.tipo == tipo) && (!produto_atual.embalado) && (produto_atual.inspecionado)) {
                 produto_atual.embalado = true;
+                if (this.id != -1){
                 System.out.print("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: ");
                 switch(this.tipo){
                   case 1: System.out.println("1 - Padrão");break;
@@ -197,6 +202,7 @@ class MaquinaEmbalagem extends Maquina {
                   case 7: System.out.println("7 - Brinquedo");break;
                 }
                 System.out.println("embalado e enviado com sucesso!\n");
+                }
                 fabrica_pai.atualizarProdutosEmbalados(1);
                 Maquina.produtos_entregando.add(produto_atual);
                 Maquina.produtos.remove(i);
@@ -214,6 +220,7 @@ class MaquinaEmbalagem extends Maquina {
           // Lógica de execução da máquina
           while (ligada && emFuncionamento) {
             try {
+              if (id != -1){
               switch(tipo){
                 case 1: Thread.sleep(10000); break; // Padrão
                 case 2: Thread.sleep(15000); break; // Tecidos
@@ -222,6 +229,7 @@ class MaquinaEmbalagem extends Maquina {
                 case 5: Thread.sleep(18000); break; // Móveis
                 case 6: Thread.sleep(25000); break; // Eletrônicos
                 case 7: Thread.sleep(12000); break; // Brinquedos
+              }
               }
               embalarProduto();
             } catch (InterruptedException e) {
@@ -259,6 +267,7 @@ class MaquinaInspecao extends Maquina {
             Produtos produto_atual = Maquina.produtos.get(i);
             if (produto_atual.tipo == tipo && !produto_atual.inspecionado && !produto_atual.temProblema) {
                 produto_atual.inspecionado = true;
+                if (this.id != -1){
                 System.out.print("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: ");
                 switch(this.tipo){
                   case 1: System.out.println("1 - Padrão");break;
@@ -270,9 +279,11 @@ class MaquinaInspecao extends Maquina {
                   case 7: System.out.println("7 - Brinquedo");break;
                 }
                 System.out.println("foi inspecionado, e não apresenta problemas!\n");
+                }
                 fabrica_pai.atualizarProdutosInspecionados(1);
                 break;
             } else if (produto_atual.tipo == tipo && produto_atual.temProblema) {
+              if (this.id != -1){
                 System.out.print("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: ");
                 switch(this.tipo){
                   case 1: System.out.println("1 - Padrão");break;
@@ -284,6 +295,7 @@ class MaquinaInspecao extends Maquina {
                   case 7: System.out.println("7 - Brinquedo");break;
                 }
                 System.out.println("foi inspecionado, e apresenta problemas!\nproduto descartado!\n");
+              }
                 Maquina.produtos.remove(i);
                 break;
             }
@@ -300,10 +312,12 @@ class MaquinaInspecao extends Maquina {
   public void iniciarThread(){
     if (thread == null || !thread.isAlive()) {
       thread = new Thread(new Runnable() {
+
         public void run() {
           // Lógica de execução da máquina
           while (ligada && emFuncionamento) {
             try {
+              if (id != -1){
               switch(tipo){
                 case 1: Thread.sleep(8000); break; // Padrão
                 case 2: Thread.sleep(10000); break; // Tecidos
@@ -312,6 +326,7 @@ class MaquinaInspecao extends Maquina {
                 case 5: Thread.sleep(12000); break; // Móveis
                 case 6: Thread.sleep(20000); break; // Eletrônicos
                 case 7: Thread.sleep(10000); break; // Brinquedos
+              }
               }
               inspecionarProduto();
             } catch (InterruptedException e) {
@@ -348,6 +363,7 @@ class MaquinaEntrega extends Maquina {
       for (int i = 0; i < Maquina.produtos_entregando.size(); i++) {
           Produtos produto_atual = Maquina.produtos_entregando.get(i);
           if (produto_atual.tipo == tipo) {
+            if (id != -1){
               System.out.print("\nLOG MAQUINA:\nTIPO DO PRODUTO: " + this.tipo + "\nID FABRICA: " + this.fabrica_pai.id + "\nID: " + this.id + "\nMENSAGEM: Produto de tipo: ");
               switch(this.tipo){
                   case 1: System.out.println("1 - Padrão");break;
@@ -359,6 +375,7 @@ class MaquinaEntrega extends Maquina {
                   case 7: System.out.println("7 - Brinquedo");break;
                 }
               System.out.println("foi entregue com sucesso!");
+            }
               fabrica_pai.atualizarProdutosEntregues(1);
               Maquina.produtos_entregando.remove(i);
           }

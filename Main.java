@@ -117,6 +117,25 @@ public class Main {
                 maquinasInfo.append("\nQuantidade de máquinas por tipo:\nProdução: " + qnt_producao + "\nEmbalagem: "
                     + qnt_embalagem + "\nInspeção: " + qnt_inspecao + "\nEntrega: " + qnt_entrega);
                 JOptionPane.showMessageDialog(null, maquinasInfo.toString());
+
+                automacao.quant_emba = qnt_embalagem;
+                automacao.quant_entr = qnt_entrega;
+                automacao.quant_insp = qnt_inspecao;
+                automacao.quant_prod = qnt_producao;
+
+                if (automacao.quant_emba <= 0){
+                  automacao.adicionarMaquina(new MaquinaEmbalagem(-1,automacao.tipo, automacao));
+                }
+                if (automacao.quant_entr <= 0){
+                  automacao.adicionarMaquina(new MaquinaEntrega(-1,automacao.tipo, automacao));
+                }
+                if (automacao.quant_insp <= 0){
+                  automacao.adicionarMaquina(new MaquinaInspecao(-1,automacao.tipo, automacao));
+                }
+                if (automacao.quant_prod <= 0){
+                  automacao.adicionarMaquina(new MaquinaProducao(-1,automacao.tipo, automacao));
+                }
+
                 automacao.inicializar();
             }
             do {
@@ -300,7 +319,17 @@ public class Main {
             break;
         case 2:
             if (fabrica.getTotalFabricas() > 1) {
-              String idInput = JOptionPane.showInputDialog("Digite o ID da Fabrica que quer selecionar: ");
+              String fabricasDisponiveis = "";
+              for (int i = 0; i < fabrica.getTotalFabricas(); i++){
+                if (i != fab_id){
+                  fabricasDisponiveis += (i + " ");
+                }else{
+                  fabricasDisponiveis += "x ";
+                }
+              }
+              fabricasDisponiveis+= "\n";
+              String idInput = JOptionPane.showInputDialog("Digite o ID da Fabrica que quer selecionar:\nID das Fabricas Disponiveis: " + fabricasDisponiveis);
+              
               opcao = Integer.parseInt(idInput);
               if ((opcao >= 0) && (opcao <= fabrica.getTotalFabricas() - 1)) {
                 fab_id = opcao;

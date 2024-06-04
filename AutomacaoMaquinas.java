@@ -9,6 +9,10 @@ class AutomacaoMaquinas {
     private int produtosEmbalados;
     private int produtosInspecionados;
     private int produtosEntregues;
+    public int quant_prod;
+    public int quant_insp;
+    public int quant_emba;
+    public int quant_entr;
 
     public int getProdutosProduzidos() {
         return produtosProduzidos;
