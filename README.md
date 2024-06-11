@@ -161,11 +161,6 @@ O Objetivo do projeto é se extender até o final do semestre, até la, o projet
 | Ideias  | Feitas? | Estado |
 | ------------- | ------------- | ------------- |
 | Fazer uso de Threads para deixar a automatização das maquinas em segundo plano  | <ul><li>- [x] </li> | Terminado |
-| Adicionar uma forma de saber quantos itens foram entregues  | <ul><li>- [ ] </li> | Em Andamento |
 | Adicionar uma maquina entregadora  | <ul><li>- [x] </li> | Terminado |
-| Monitoramento de Status em Tempo Real  | <ul><li>- [ ] </li> | Não Iniciado |
-| Monitoramento de Status em Tempo Real  | <ul><li>- [ ] </li> | Não Iniciado |
-| Monitoramento de Status em Tempo Real  | <ul><li>- [ ] </li> | Não Iniciado |
-| Monitoramento de Status em Tempo Real  | <ul><li>- [ ] </li> | Não Iniciado |
 
 OBS: Mais ideias podem ser adicionadas ou removidas com o tempo, nada é definitivo ainda.
